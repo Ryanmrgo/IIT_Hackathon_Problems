@@ -1,50 +1,38 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
-int main()
-{
-    printf("Enter n \n");
-    int n;
-    scanf("%d", &n);
-    char s[n];
-    printf("\nenter string \n");
-    scanf("\n%[^\n]", s);
-    char ans='y';
-    printf("\nstring: %s",s);
-    int counter = 0;
-    while(ans == 'y'){
+// Function to find the occurrences of a pattern in the string
+void findPattern(char *s, char *pattern) {
+    int n = strlen(s);
+    int m = strlen(pattern);
+    int found = 0;
 
-        char pat[n];
-        printf("\nenter pattern ");
-        scanf("\n%[^\n]", pat);
-        printf("\npattern: %s", pat);
-       
-        int i, j, l1, l2;
-        int counter = 0;
-
-        l1 = strlen(s);
-        l2 = strlen(pat);
-
-        for(i = 0; i < l1 - 1; i++) {
-            if(strstr(s + i, pat) == s + i) {
-                printf("\nposition: %d", i+1);
-                counter++;
-                i = i + l2 -1; //to cover up the pattern length for next checking
-            }
-        }
-       
-        if(counter!=0)
-            printf("\noccurence of %s is:  %d ", pat, counter);
-        else
-            printf("-1");
-           
-        printf("\ndo you want to check more patterns?y/n \n");
-        char choice;
-       
-        scanf("\n%c", &choice);
-        if(choice == 'n'){
-            ans=choice;
+    for (int i = 0; i <= n - m; i++) {
+        if (strncmp(&s[i], pattern, m) == 0) {
+            printf("%d ", i);
+            found = 1;
         }
     }
+
+    if (!found) {
+        printf("-1");
+    }
+    printf("\n");
+}
+
+int main() {
+    int n;
+    char s[1000];
+    
+    // Read the length of the string and the string itself
+    scanf("%d", &n);
+    scanf("%s", s);
+
+    // Read and process each pattern until EOF
+    char pattern[100];
+    while (scanf("%s", pattern) != EOF) {
+        findPattern(s, pattern);
+    }
+
+    return 0;
 }

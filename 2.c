@@ -14,7 +14,6 @@ int main()
         else
         {
             r=g/f;
-            
         }
     d=b-a*r;
     printf("%d %d %d\n",a,r,d);
